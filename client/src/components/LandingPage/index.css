@@ -1,0 +1,13 @@
+.navB {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border:green;
+  }
+  
+  
+  .logohead {
+    align-content: flex-start;
+  
+  }
+  @import "~antd/dist/antd.css";
