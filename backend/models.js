@@ -14,10 +14,7 @@ const User = sequelize.define('user', {
   email: Sequelize.STRING,
   password: Sequelize.STRING,
   street_address: Sequelize.STRING,
-  zipcode: Sequelize.INTEGER,
-  city: Sequelize.STRING,
-  state: Sequelize.STRING,
-  phone_number: Sequelize.INTEGER,
+  phone: Sequelize.INTEGER,
   credit_card: Sequelize.BIGINT
 });
 
@@ -27,6 +24,7 @@ User.beforeCreate((user, options) => {
 });
 
 const Store = sequelize.define('store', {
+  name: Sequelize.STRING,
   address: Sequelize.TEXT,
   phone_number: Sequelize.INTEGER,
   hours_of_operation: Sequelize.TEXT,
