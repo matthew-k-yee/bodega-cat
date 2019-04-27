@@ -39,6 +39,18 @@ class UserForm extends Component {
         }
         //POST request here
         console.log(data);
+
+        this.setState({
+          name: "",
+          email: "",
+          password: "",
+          street_address: "",
+          zipcode: "",
+          city: "",
+          state: "",
+          phone_number: "",
+          credit_card: ""
+        })
     }
 
     render() {
