@@ -57,7 +57,7 @@ class UserForm extends Component {
                   />
                 </div>
                 <div className="field">
-                  <label htmlFor="Email">Email: </label>
+                  <label htmlFor="email">Email: </label>
                   <input
                     onChange={this.onFormChange}
                     type="text"
@@ -67,7 +67,7 @@ class UserForm extends Component {
                   />
                 </div>
                 <div className="field">
-                  <label htmlFor="name">Password: </label>
+                  <label htmlFor="password">Password: </label>
                   <input
                     onChange={this.onFormChange}
                     type="password"
@@ -77,7 +77,7 @@ class UserForm extends Component {
                   />
                 </div>
                 <div className="field">
-                  <label htmlFor="name">Street Address: </label>
+                  <label htmlFor="street_address">Street Address: </label>
                   <input
                     onChange={this.onFormChange}
                     type="text"
@@ -87,7 +87,7 @@ class UserForm extends Component {
                   />
                 </div>
                 <div className="field">
-                  <label htmlFor="name">City: </label>
+                  <label htmlFor="city">City: </label>
                   <input
                     onChange={this.onFormChange}
                     type="text"
@@ -97,7 +97,7 @@ class UserForm extends Component {
                   />
                 </div>
                 <div className="field">
-                  <label htmlFor="name">State: </label>
+                  <label htmlFor="state">State: </label>
                   <input
                     onChange={this.onFormChange}
                     type="text"
@@ -107,7 +107,7 @@ class UserForm extends Component {
                   />
                 </div>
                 <div className="field">
-                  <label htmlFor="name">Zipcode: </label>
+                  <label htmlFor="zipcode">Zipcode: </label>
                   <input
                     onChange={this.onFormChange}
                     type="text"
@@ -117,7 +117,7 @@ class UserForm extends Component {
                   />
                 </div>
                 <div className="field">
-                  <label htmlFor="name">Phone: </label>
+                  <label htmlFor="phone_number">Phone: </label>
                   <input
                     onChange={this.onFormChange}
                     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
@@ -126,7 +126,7 @@ class UserForm extends Component {
                     placeholder="123-456-7890"
                     value={this.state.phone_number}
                   />
-                  <span class="note">Format: 123-456-7890</span>
+                  <span className="note">Format: 123-456-7890</span>
                 </div>
                 {/* Add option for credit card */}
                 <div className="control">
