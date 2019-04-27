@@ -1,6 +1,6 @@
-const { sequelize, User, Store, Inventory } = require('./models')
+const { sequelize, User, Store, Inventory } = require('./models');
 
-async function seed() {
+async function seeds() {
   try { 
     const user = await User.bulkCreate([
       {
@@ -117,11 +117,11 @@ async function seed() {
         name:  'Gatorade',
         price: 1.50,
         item_count: 25
-      }
+      },
     ])
   } catch (e) {
     console.log(e);
   }
-}
+};
 
-seed()
+seeds();
