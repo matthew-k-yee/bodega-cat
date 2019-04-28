@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import LandingPage from './components/LandingPage'
-
+import Shoppingcart from './components/ShoppingCart/index';
 
 class App extends Component {
   constructor(props){
@@ -34,6 +34,7 @@ class App extends Component {
       <div className="App">
       Bodega Cats
       {this.render()}
+      <Shoppingcart /> 
       </div>
     );
   }
