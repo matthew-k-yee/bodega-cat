@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import {Map, InfoWindow, Marker, DistanceMatrixService, GoogleApiWrapper} from 'google-maps-react';
+
+const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+
 class AddressForm extends Component{
 
   constructor(props){
     super(props);
       this.state={
-    street_address:'',
-    zipcode:'',
-    city:'',
-    state:''
+        street_address:'',
+        searchedAddress:''
     }
 
   this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,38 +19,48 @@ class AddressForm extends Component{
 
   handleChange = (e) => {
   const{ name, value } = e.target;
-  this.setState(prevState => ({
-    ...prevState,
-    auth: {
-      ...prevState.auth,
-      [name]: value
-    }
-  }));
+
+  this.setState({
+    [name]: value
+  })
+
   }
+
+
+  checkdirection=async(name) =>{
+
+  try {
+    const data = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${name}&key=${googleClientId}`);
+    // const address = data.data.results[0].formatted_address;
+    const address=data.data.results[0].formatted_address;
+
+
+    console.log(address)
+
+    this.setState({searchedAddress: address})
+
+  } catch (e) {
+    console.log(e)
+  }
+}
 
 
   async handleSubmit(e) {
       e.preventDefault();
-      try{
+      this.checkdirection(this.state.street_address);
 
-          console.log(e);
-        }
-
-      }catch(e){
-        console.log(e);
-
-      }
     }
 
 render() {
     return(
       <div className="AddressForm">
 
-        <form onSubmit={ this.onFormSubmit }>
+        <form onSubmit={ this.handleSubmit }>
+
                         <div className="field">
                           <label htmlFor="street_address">Street Address </label>
                           <input
-                            onChange={this.onFormChange}
+                            onChange={this.handleChange}
                             type="text"
                             name="street_address"
                             placeholder="123 any street"
@@ -57,48 +69,17 @@ render() {
                         </div>
 
 
-                        <div className="field">
-                          <label htmlFor="zipcode">Zipcode</label>
-                          <input
-                            onChange={this.onFormChange}
-                            type="text"
-                            name="zipcode"
-                            placeholder="0000"
-                            value={this.state.zipcode}
-                            maxLength="4"
-                          />
-                        </div>
-
-
-                        <div className="field">
-                          <label htmlFor="city">City</label>
-                          <input
-                            onChange={this.onFormChange}
-                            type="text"
-                            name="city"
-                            placeholder="nowhereville"
-                            value={this.state.city}
-                          />
-                        </div>
-
-
-                        <div className="field">
-                          <label htmlFor="state">State </label>
-                          <input
-                            onChange={this.onFormChange}
-                            type="text"
-                            name="state"
-                            placeholder=""
-                            value={this.state.state}
-                          />
-                        </div>
 
         			</form>
 
+              {this.state.searchedAddress}
       </div>
     );
 
   }
 
 }
-export default AddressForm;
+
+export default GoogleApiWrapper({
+  apiKey: (googleClientId)
+})(AddressForm)
