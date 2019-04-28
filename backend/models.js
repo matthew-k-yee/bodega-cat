@@ -15,7 +15,7 @@ const Consumer = sequelize.define('consumer', {
   email: Sequelize.STRING,
   password_digest: Sequelize.STRING,
   address: Sequelize.STRING,
-  phone_number: Sequelize.INTEGER,
+  phone_number: Sequelize.STRING,
 });
 
 const Partner = sequelize.define('partner', {

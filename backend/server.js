@@ -21,6 +21,9 @@ const apiSecret = process.env.GOOGLE_API_KEY;
 const app = express();
 // const stripe = require("stripe")(keySecret);
 
+const consumerRouter = require('./users/route/consumer');
+const partnerRouter = require('./users/route/partner');
+
 app.set("view engine", "pug");
 app.use(require("body-parser").urlencoded({extended: false}));
 
@@ -31,6 +34,9 @@ app.use(logger('dev'));
 
 const PORT = process.env.PORT || 3001
 
+app.use('/consumer/auth', consumerRouter);
+app.use('/partner/auth', partnerRouter);
+
 app.get('/',
   jwt({ secret }),
   (req, res) => {
@@ -40,37 +46,37 @@ app.get('/',
   }
 );
 
-app.get('/consumer/auth/login', (req, res) => {
-  consumer.renderLogin();
-}); 
+// app.get('/consumer/auth/login', (req, res) => {
+//   consumer.renderLogin();
+// }); 
 
-app.post('/consumer/auth/login', (req, res) => {
-  consumer.handleLogin();
-}); 
+// app.post('/consumer/auth/login', (req, res) => {
+//   consumer.handleLogin();
+// }); 
 
-app.get('/consumer/auth/register', (req, res) => {
-  consumer.renderRegister();
-}); 
+// app.get('/consumer/auth/register', (req, res) => {
+//   consumer.renderRegister();
+// }); 
 
-app.post('/consumer/auth/register', (req, res) => {
-  consumer.handleRegister();
-}); 
+// app.post('/consumer/auth/register', (req, res) => {
+//   consumer.handleRegister();
+// }); 
 
-app.get('/partner/auth/login', (req, res) => {
-  partner.renderLogin();
-}); 
+// app.get('/partner/auth/login', (req, res) => {
+//   partner.renderLogin();
+// }); 
 
-app.post('/partner/auth/login', (req, res) => {
-  partner.handleLogin();
-}); 
+// app.post('/partner/auth/login', (req, res) => {
+//   partner.handleLogin();
+// }); 
 
-app.get('/partner/auth/register', (req, res) => {
-  partner.renderRegister();
-}); 
+// app.get('/partner/auth/register', (req, res) => {
+//   partner.renderRegister();
+// }); 
 
-app.post('/partner/auth/register', (req, res) => {
-  partner.handleRegister();
-}); 
+// app.post('/partner/auth/register', (req, res) => {
+//   partner.handleRegister();
+// }); 
 
 app.get('/', (req, res) => {
   res.json({msg: 'it works'});
