@@ -7,6 +7,8 @@ const { Consumer, Partner, Store, Inventory } = require('./models');
 const keyPublishable = process.env.PUBLISHABLE_KEY;
 const keySecret = process.env.SECRET_KEY;
 
+const secret = process.env.GOOGLE_API_KEY;
+
 const app = express();
 const stripe = require("stripe")(keySecret);
 
@@ -21,6 +23,10 @@ const PORT = process.env.PORT || 3001
 
 app.get('/', (req, res) =>
   res.render("index.pug", {keyPublishable}));
+
+app.get('/maps', (req, res) => 
+  console.log(`${secret}`)
+)
 
 app.get('/consumers', async (req, res) => {
   try {
