@@ -3,55 +3,61 @@ const {Sequelize} = require('sequelize');
 const sequelize = new Sequelize({
   database: 'bodega_cat',
   dialect: 'postgres',
-  operatorsAliases: false,
+  // operatorsAliases: false,
   define: {
     underscored: true
   }
 });
 
-const User = sequelize.define('user', {
-  name: Sequelize.STRING, 
+const Consumer = sequelize.define('consumer', {
+  first_name: Sequelize.STRING, 
+  last_name: Sequelize.STRING,
   email: Sequelize.STRING,
-  password: Sequelize.STRING,
+  password_digest: Sequelize.STRING,
   street_address: Sequelize.STRING,
-  phone: Sequelize.INTEGER,
-  credit_card: Sequelize.BIGINT
+  phone_number: Sequelize.STRING,
 });
 
-User.beforeCreate((user, options) => {
-  const password_digest = bcrypt.hashSync(user.password, 10);
-  user.password = password_digest;
+const Partner = sequelize.define('partner', {
+  first_name: Sequelize.STRING,
+  last_name: Sequelize.STRING,
+  email: Sequelize.STRING,
+  password_digest: Sequelize.STRING,
+  address: Sequelize.STRING,
+  phone_number: Sequelize.STRING,
 });
 
 const Store = sequelize.define('store', {
-  name: Sequelize.STRING,
-  address: Sequelize.TEXT,
-  phone_number: Sequelize.INTEGER,
-  hours_of_operation: Sequelize.TEXT,
-  email: Sequelize.TEXT,
-  category: Sequelize.TEXT,
-  password: Sequelize.TEXT
-});
-
-const Inventory = sequelize.define('inventory', {
-  name: Sequelize.TEXT,
-  price: Sequelize.STRING,
-  item_count: Sequelize.INTEGER,
-  category: Sequelize.TEXT
+  store_name: Sequelize.STRING, 
+  address: Sequelize.STRING,
+  phone_number: Sequelize.STRING,
+  monday: Sequelize.STRING,
+  tuesday: Sequelize.STRING,
+  wednesday: Sequelize.STRING,
+  thursday: Sequelize.STRING,
+  friday: Sequelize.STRING,
+  saturday: Sequelize.STRING,
+  monday: Sequelize.STRING,
+  sunday: Sequelize.STRING,
+  category: Sequelize.STRING,
 })
 
+const Inventory = sequelize.define('inventory', {
+  name: Sequelize.STRING,
+  category: Sequelize.STRING,
+  price: Sequelize.INTEGER,
+  in_stock: Sequelize.BOOLEAN,
+})
 
-Inventory.belongsTo(Store)
-Store.hasMany(Inventory)
+Partner.hasMany(Store)
+Store.belongsTo(Partner)
 
-User.hasMany(Inventory)
-Inventory.belongsTo(User)
-
-
+Inventory.hasOne(Store)
 
 module.exports = {
   sequelize, 
-  User, 
+  Consumer,
+  Partner, 
   Store, 
   Inventory
 }

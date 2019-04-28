@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
-const { User, Store, Inventory } = require('./models');
+const { Consumer, Partner, Store, Inventory } = require('./models');
 
 const keyPublishable = process.env.PUBLISHABLE_KEY;
 const keySecret = process.env.SECRET_KEY;
@@ -22,27 +22,27 @@ const PORT = process.env.PORT || 3001
 app.get('/', (req, res) =>
   res.render("index.pug", {keyPublishable}));
 
-app.get('/users', async (req, res) => {
+app.get('/consumers', async (req, res) => {
   try {
-    const users = await User.findAll();
+    const users = await Consumer.findAll();
     res.json({ users });
   } catch(e) {
     console.log(e);
   }
 }); 
 
-app.get('/users/:id', async (req, res) => {
+app.get('/consumers/:id', async (req, res) => {
   try {
-    const user = await User.findByPk(req.params.id);
+    const user = await Consumer.findByPk(req.params.id);
     res.json({user});
   } catch(e) {
     console.log(e);
   }
 });
 
-app.post('/users', async (req, res) => {
+app.post('/consumers', async (req, res) => {
   try {
-    User.create(req.body);
+    Consumer.create(req.body);
     res.json({
       message: `User with name ${req.body.name} created!`
     });
@@ -51,9 +51,9 @@ app.post('/users', async (req, res) => {
   }
 });
 
-app.delete('/users/:id', async (req, res) => {
+app.delete('/consumers/:id', async (req, res) => {
   try {
-    const queryItem = User.findByPk(req.params.id);
+    const queryItem = Consumer.findByPk(req.params.id);
     res.json({message: 'item deleted', item: queryItem});
   } catch(e) {
     console.error(e);
