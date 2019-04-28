@@ -9,7 +9,7 @@ class UserForm extends Component {
           first_name: "",
           last_name: "",
           email: "",
-          password_digest: "",
+          password: "",
           street_address: "",
           phone_number: ""
         }
@@ -28,22 +28,23 @@ class UserForm extends Component {
             first_name: this.state.first_name,
             last_name: this.state.last_name,
             email: this.state.email,
-            password_digest: this.state.password_digest,
+            password: this.state.password,
             street_address: this.state.street_address,
             phone_number: this.state.phone_number,
         }
         //POST request here
         registerConsumer(data);
-
+        // this.props.populateStorage(token);
         this.setState({
           first_name: "",
           last_name: "",
           email: "",
-          password_digest: "",
+          password: "",
           street_address: "",
           phone_number: ""
-        })
-    }
+        });
+        // this.props.logUser();
+      }
 
     render() {
         return(
@@ -81,13 +82,13 @@ class UserForm extends Component {
                   />
                 </div>
                 <div className="field">
-                  <label htmlFor="password_digest">Password: </label>
+                  <label htmlFor="password">Password: </label>
                   <input
                     onChange={this.onFormChange}
                     type="password"
-                    name="password_digest"
+                    name="password"
                     placeholder="password"
-                    value={this.state.password_digest}
+                    value={this.state.password}
                   />
                 </div>
                 <div className="field">
