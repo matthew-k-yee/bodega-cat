@@ -4,7 +4,7 @@ import { Button, Input } from 'reactstrap';
 import "./index.css";
 
 export default function LandingPage(props) {
-
+console.log(props.view)
   return (
     <div>
       <nav id="nav">
@@ -13,7 +13,7 @@ export default function LandingPage(props) {
         </a>
         <h1>Bodega Cat</h1>
         <div id="nav-buttons">
-          <p>Sign Up</p>
+          <p onClick={() => props.changeView('signup')}>Sign Up</p>
           <p>Sign In</p>
         </div>
       </nav>
@@ -22,8 +22,6 @@ export default function LandingPage(props) {
           <Input
           id="address-input"
           placeholder="Enter Address"
-          onSearch={value => console.log(value)}
-          enterButton
           />
           <p>Support local businesses, get what you need fast</p>
         </div>
