@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import jwtDecode from 'jwt-decode';
 import logo from './logo.svg';
 import './App.css';
 
@@ -22,18 +23,20 @@ class App extends Component {
   changeView = async view => {
     await this.setState({
       view: view
-    })
+    });
   }
 
   populateStorage = token => {
     localStorage.setItem('token', token);
   }
 
-  logUser = userToken => {
-    const userData = jwtDecode(userToken.token);
+  logUser = () => {
+    const token = localStorage.getItem('token');
+    const userData = jwtDecode(token);
     this.setState({
       isLogged: true,
       email: userData.email,
+      view: 'landing'
     });
   }
 
@@ -43,7 +46,7 @@ class App extends Component {
         return (<LandingPage changeView={this.changeView}/>)
         break;
       case 'signup':
-        return (<SignUpContainer changeView={this.changeView}/>)
+        return (<SignUpContainer populateStorage={this.populateStorage} logUser={this.logUser} changeView={this.changeView}/>)
         break;
       default:
         return (<LandingPage changeView={this.changeView}/>)
