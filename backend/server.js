@@ -6,20 +6,20 @@ require('dotenv').config()
 const axios = require('axios')
 const jwt = require('express-jwt');
 const flash = require('connect-flash');
-const Consumer = require('./users/controller/consumerAuth');
-const Partner = require('./users/controller/partnerAuth');
+const consumer = require('./users/controller/consumerAuth');
+const partner = require('./users/controller/partnerAuth');
 
-const jwtSecret = process.env.TOKEN_SECRET || 'securesecret';
+const secret = process.env.TOKEN_SECRET || 'securesecret';
 
 const { Consumer, Partner, Store, Inventory } = require('./models');
 
 const keyPublishable = process.env.PUBLISHABLE_KEY;
 const keySecret = process.env.SECRET_KEY;
 
-const secret = process.env.GOOGLE_API_KEY;
+const apiSecret = process.env.GOOGLE_API_KEY;
 // console.log(secret)
 const app = express();
-const stripe = require("stripe")(keySecret);
+// const stripe = require("stripe")(keySecret);
 
 app.set("view engine", "pug");
 app.use(require("body-parser").urlencoded({extended: false}));
@@ -31,8 +31,8 @@ app.use(logger('dev'));
 
 const PORT = process.env.PORT || 3001
 
-app.get('/',
-  jwt({ jwtSecret }),
+app.use('/',
+  jwt({ secret }),
   (req, res) => {
     res.json({
       message: `Hello ${req.user.username}!`,
@@ -40,41 +40,42 @@ app.get('/',
   }
 );
 
-app.get('consumer/auth/login', (req, res) => {
-  Consumer.renderLogin();
+app.get('/consumer/auth/login', (req, res) => {
+  consumer.renderLogin();
 }); 
 
-app.post('consumer/auth/login', (req, res) => {
-  Consumer.handleLogin();
+app.post('/consumer/auth/login', (req, res) => {
+  consumer.handleLogin();
 }); 
 
-app.get('consumer/auth/register', (req, res) => {
-  Consumer.renderRegister();
+app.get('/consumer/auth/register', (req, res) => {
+  consumer.renderRegister();
 }); 
 
-app.post('consumer/auth/register', (req, res) => {
-  Consumer.handleRegister();
+app.post('/consumer/auth/register', (req, res) => {
+  consumer.handleRegister();
 }); 
 
-app.get('partner/auth/login', (req, res) => {
-  Partner.renderLogin();
+app.get('/partner/auth/login', (req, res) => {
+  partner.renderLogin();
 }); 
 
-app.post('partner/auth/login', (req, res) => {
-  Partner.handleLogin();
+app.post('/partner/auth/login', (req, res) => {
+  partner.handleLogin();
 }); 
 
-app.get('partner/auth/register', (req, res) => {
-  Partner.renderRegister();
+app.get('/partner/auth/register', (req, res) => {
+  partner.renderRegister();
 }); 
 
-app.post('partner/auth/register', (req, res) => {
-  Partner.handleRegister();
+app.post('/partner/auth/register', (req, res) => {
+  partner.handleRegister();
 }); 
 
 app.get('/', (req, res) => {
   res.json({msg: 'it works'});
-=======
+  })
+   
 app.get('/', (req, res) =>
   res.render("index.pug", {keyPublishable}));
 
@@ -82,7 +83,7 @@ app.get('/maps/:fromaddress/:destinationaddress', async (req, res) => {
   try {
     const fromaddress = req.params.fromaddress;
     const destaddress = req.params.destinationaddress
-    const resp = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${fromaddress}+NY&destinations=${destaddress}+NY&mode=walking&language=en-EN&key=${secret}`)
+    const resp = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${fromaddress}+NY&destinations=${destaddress}+NY&mode=walking&language=en-EN&key=${apiSecret}`)
     res.json(resp.data)
     } catch (e) {
       console.log(e)
@@ -161,22 +162,6 @@ app.get('/stores/:id/inventory', async (req, res) => {
 });
 
 
-// app.get('/instructors/:id/courses',async(req,res)=>{
-//   try{
-//       const id = req.params.id;
-//     const courseTeach= await Instructor.findOne({
-//       where:{id: id},
-//       include:[{
-//         model:Course,
-//         required:true,
-//       }]
-//     });
-//     res.json(courseTeach);
-//   }catch(e){
-//     res.status(500).json({e:e.message});
-//   }
-// });
-
 app.post('/stores', async (req, res) => {
   try {
     const store = Store.create(req.body);
@@ -254,6 +239,7 @@ app.delete('/partners/:id', async (req, res) => {
   }
 });
 
+
 app.listen(PORT, () => {
-  console.log('The server is listening on port: ', PORT);
+  console.log(`Express server listening on port ${PORT}`);
 });

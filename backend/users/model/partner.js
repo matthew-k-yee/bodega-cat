@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 // const db = require('../../testConDb');
-const { Partner } = require('../models.js');
+const { Partner } = require('../../models');
 
 // Search consumers by email
 const findUser = async (email) => {

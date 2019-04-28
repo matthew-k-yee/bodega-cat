@@ -1,4 +1,4 @@
-const Partner = require('../model/consumer');
+const Partner = require('../model/partner');
 const token = require('../services/token');
 
 const renderRegister = (req, res) => {

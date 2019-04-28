@@ -1,4 +1,4 @@
-const Consumer = require('../model/consumer');
+const Consumer  = require('../model/consumer');
 const token = require('../services/token');
 
 const renderRegister = (req, res) => {
