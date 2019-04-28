@@ -9,14 +9,14 @@ const flash = require('connect-flash');
 const Consumer = require('./users/controller/consumerAuth');
 const Partner = require('./users/controller/partnerAuth');
 
-const jwtSecret = process.env.TOKEN_SECRET || 'securesecret';
+const secret = process.env.TOKEN_SECRET || 'securesecret';
 
 const { Consumer, Partner, Store, Inventory } = require('./models');
 
 const keyPublishable = process.env.PUBLISHABLE_KEY;
 const keySecret = process.env.SECRET_KEY;
 
-const secret = process.env.GOOGLE_API_KEY;
+const apiSecret = process.env.GOOGLE_API_KEY;
 // console.log(secret)
 const app = express();
 const stripe = require("stripe")(keySecret);
@@ -32,7 +32,7 @@ app.use(logger('dev'));
 const PORT = process.env.PORT || 3001
 
 app.get('/',
-  jwt({ jwtSecret }),
+  jwt({ secret }),
   (req, res) => {
     res.json({
       message: `Hello ${req.user.username}!`,
@@ -74,7 +74,7 @@ app.post('partner/auth/register', (req, res) => {
 
 app.get('/', (req, res) => {
   res.json({msg: 'it works'});
-=======
+
 app.get('/', (req, res) =>
   res.render("index.pug", {keyPublishable}));
 
@@ -82,7 +82,7 @@ app.get('/maps/:fromaddress/:destinationaddress', async (req, res) => {
   try {
     const fromaddress = req.params.fromaddress;
     const destaddress = req.params.destinationaddress
-    const resp = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${fromaddress}+NY&destinations=${destaddress}+NY&mode=walking&language=en-EN&key=${secret}`)
+    const resp = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${fromaddress}+NY&destinations=${destaddress}+NY&mode=walking&language=en-EN&key=${apiSecret}`)
     res.json(resp.data)
     } catch (e) {
       console.log(e)
