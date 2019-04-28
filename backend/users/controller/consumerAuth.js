@@ -2,7 +2,7 @@ const Consumer = require('../model/consumer');
 const token = require('../services/token');
 
 const renderRegister = (req, res) => {
-  res.render('auth/register', { messages: req.flash('error') });
+  res.render('/consumer/auth/register', { messages: req.flash('error') });
 };
 
 const handleRegister = async (req, res) => {
@@ -16,12 +16,12 @@ const handleRegister = async (req, res) => {
     return res.json({ userToken });
   } catch (err) {
     req.flash('error', 'username unavailable');
-    res.redirect('/auth/register');
+    res.redirect('/consumer/auth/register');
   }
 };
 
 const renderLogin = (req, res) => {
-  res.render('auth/register', { messages: req.flash('error') });
+  res.render('/consumer/auth/login', { messages: req.flash('error') });
 };
 
 const handleLogin = async (req, res) => {
