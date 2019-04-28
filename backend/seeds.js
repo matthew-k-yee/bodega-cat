@@ -86,6 +86,7 @@ async function seeds() {
         monday: '0 - 24',
         sunday: '0 - 24',
         category: 'Groceries',
+        partner_id: 1
       },
       {
         store_name: 'Space Kitchen',
@@ -100,6 +101,7 @@ async function seeds() {
         monday: '0 - 24',
         sunday: '0 - 24',
         category: 'Hardware',
+        partner_id: 2
       },
       {
         store_name: '100 GET FOODS',
@@ -114,6 +116,7 @@ async function seeds() {
         monday: '0 - 24',
         sunday: '0 - 24',
         category: 'Groceries',
+        partner_id: 3
       },
       {
         store_name: 'BODEGA MARKET',
@@ -128,6 +131,7 @@ async function seeds() {
         monday: '0 - 24',
         sunday: '0 - 24',
         category: 'Groceries',
+        partner_id: 4
       },
       {
         store_name: "Steve's Electronics",
@@ -142,6 +146,7 @@ async function seeds() {
         monday: '0 - 24',
         sunday: '0 - 24',
         category: 'Electronics',
+        partner_id: 1
       },
     ]);
 
@@ -151,72 +156,294 @@ async function seeds() {
         category: 'food',
         price: 12,
         in_stock: true,
+        store_id: 1
       },
       {
         name:  'Twinkies',
         category: 'food',
         price: .50,
         in_stock: true,
+        store_id: 1
       },
       {
         name:  'Hagan Daas',
         category: 'food',
         price: 6,
         in_stock: true,
+        store_id: 1
       },
       {
         name:  'Toothbrush',
         category: 'personal_care',
         price: 2,
         in_stock: true,
+        store_id: 1
       },
       {
         name:  'Gatorade',
         category: 'food',
         price: 1.50,
         in_stock: true,
+        store_id: 1
       },
       {
         name:  'Toliet Paper',
         category: 'household',
         price: 1.50,
         in_stock: true,
+        store_id: 1
       },
       {
         name:  'Toothpaste',
         category: 'personal_care',
         price: 3,
         in_stock: true,
+        store_id: 1
       },
       {
         name:  'USB_C Charger',
         category: 'electronics',
         price: 3,
         in_stock: true,
+        store_id: 1
       },
       {
         name:  'Hammer',
         category: 'hardware',
         price: 10,
         in_stock: true,
+        store_id: 2
       },
       {
         name:  'Nails',
         category: 'hardware',
         price: 4,
         in_stock: true,
+        store_id: 2
       },
       {
         name:  'Lightbulb',
         category: 'household',
         price: 3,
         in_stock: true,
+        store_id: 1
       },
       {
         name:  'Headphones',
         category: 'electronics',
         price: 3,
         in_stock: true,
+        store_id: 1
+      },
+      {
+        name:  'Shin Ramen',
+        category: 'food',
+        price: 12,
+        in_stock: true,
+        store_id: 3
+      },
+      {
+        name:  'Twinkies',
+        category: 'food',
+        price: .50,
+        in_stock: true,
+        store_id: 3
+      },
+      {
+        name:  'Hagan Daas',
+        category: 'food',
+        price: 6,
+        in_stock: true,
+        store_id: 3
+      },
+      {
+        name:  'Toothbrush',
+        category: 'personal_care',
+        price: 2,
+        in_stock: true,
+        store_id: 3
+      },
+      {
+        name:  'Gatorade',
+        category: 'food',
+        price: 1.50,
+        in_stock: true,
+        store_id: 3
+      },
+      {
+        name:  'Toliet Paper',
+        category: 'household',
+        price: 1.50,
+        in_stock: true,
+        store_id: 3
+      },
+      {
+        name:  'Toothpaste',
+        category: 'personal_care',
+        price: 3,
+        in_stock: true,
+        store_id: 3
+      },
+      {
+        name:  'USB_C Charger',
+        category: 'electronics',
+        price: 3,
+        in_stock: true,
+        store_id: 3
+      },
+      {
+        name:  'Lightbulb',
+        category: 'household',
+        price: 3,
+        in_stock: false,
+        store_id: 3
+      },
+      {
+        name:  'Headphones',
+        category: 'electronics',
+        price: 3,
+        in_stock: true,
+        store_id: 3
+      },
+      {
+        name:  'Shin Ramen',
+        category: 'food',
+        price: 12,
+        in_stock: true,
+        store_id: 4
+      },
+      {
+        name:  'Twinkies',
+        category: 'food',
+        price: .50,
+        in_stock: true,
+        store_id: 4
+      },
+      {
+        name:  'Hagan Daas',
+        category: 'food',
+        price: 6,
+        in_stock: false,
+        store_id: 4
+      },
+      {
+        name:  'Toothbrush',
+        category: 'personal_care',
+        price: 2,
+        in_stock: true,
+        store_id: 4
+      },
+      {
+        name:  'Gatorade',
+        category: 'food',
+        price: 1.50,
+        in_stock: true,
+        store_id: 4
+      },
+      {
+        name:  'Toliet Paper',
+        category: 'household',
+        price: 1.50,
+        in_stock: true,
+        store_id: 4
+      },
+      {
+        name:  'Toothpaste',
+        category: 'personal_care',
+        price: 3,
+        in_stock: false,
+        store_id: 4
+      },
+      {
+        name:  'USB_C Charger',
+        category: 'electronics',
+        price: 3,
+        in_stock: true,
+        store_id: 4
+      },
+      {
+        name:  'Lightbulb',
+        category: 'household',
+        price: 3,
+        in_stock: true,
+        store_id: 4
+      },
+      {
+        name:  'Headphones',
+        category: 'electronics',
+        price: 3,
+        in_stock: true,
+        store_id: 3
+      },
+      {
+        name:  'Shin Ramen',
+        category: 'food',
+        price: 12,
+        in_stock: true,
+        store_id: 5
+      },
+      {
+        name:  'Twinkies',
+        category: 'food',
+        price: .50,
+        in_stock: true,
+        store_id: 5
+      },
+      {
+        name:  'Hagan Daas',
+        category: 'food',
+        price: 6,
+        in_stock: true,
+        store_id: 5
+      },
+      {
+        name:  'Toothbrush',
+        category: 'personal_care',
+        price: 2,
+        in_stock: true,
+        store_id: 3
+      },
+      {
+        name:  'Gatorade',
+        category: 'food',
+        price: 1.50,
+        in_stock: false,
+        store_id: 5
+      },
+      {
+        name:  'Toliet Paper',
+        category: 'household',
+        price: 1.50,
+        in_stock: true,
+        store_id: 5
+      },
+      {
+        name:  'Toothpaste',
+        category: 'personal_care',
+        price: 3,
+        in_stock: false,
+        store_id: 5
+      },
+      {
+        name:  'USB_C Charger',
+        category: 'electronics',
+        price: 3,
+        in_stock: true,
+        store_id: 5
+      },
+      {
+        name:  'Lightbulb',
+        category: 'household',
+        price: 3,
+        in_stock: true,
+        store_id: 5
+      },
+      {
+        name:  'Headphones',
+        category: 'electronics',
+        price: 3,
+        in_stock: true,
+        store_id: 5
       },
     ])
   } catch (e) {

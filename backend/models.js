@@ -40,6 +40,7 @@ const Store = sequelize.define('store', {
   monday: Sequelize.STRING,
   sunday: Sequelize.STRING,
   category: Sequelize.STRING,
+  partner_id: Sequelize.INTEGER
 })
 
 const Inventory = sequelize.define('inventory', {
@@ -47,12 +48,13 @@ const Inventory = sequelize.define('inventory', {
   category: Sequelize.STRING,
   price: Sequelize.INTEGER,
   in_stock: Sequelize.BOOLEAN,
+  store_id: Sequelize.INTEGER
 })
 
 Partner.hasMany(Store)
 Store.belongsTo(Partner)
 
-Inventory.hasOne(Store)
+Store.hasOne(Inventory)
 
 module.exports = {
   sequelize, 
