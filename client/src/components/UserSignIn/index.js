@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { loginConsumer } from '../../services/usersApi';
 // const url = endpoint url
 
 class UserSignIn extends Component {
@@ -7,7 +7,7 @@ class UserSignIn extends Component {
         super(props);
         this.state = {
           email: "",
-          password_digest: "",
+          password: "",
         }
     }
 
@@ -22,14 +22,14 @@ class UserSignIn extends Component {
         event.preventDefault();
         let data = {
             email: this.state.email,
-            password_digest: this.state.password_digest,
+            password: this.state.password,
         }
         //POST request here
-        console.log(data);
+        loginConsumer(data);
 
         this.setState({
           email: "",
-          password_digest: "",
+          password: "",
         })
     }
 
@@ -49,13 +49,13 @@ class UserSignIn extends Component {
                   />
                 </div>
                 <div className="field">
-                  <label htmlFor="password_digest">Password: </label>
+                  <label htmlFor="password">Password: </label>
                   <input
                     onChange={this.onFormChange}
                     type="password"
-                    name="password_digest"
+                    name="password"
                     placeholder="password"
-                    value={this.state.password_digest}
+                    value={this.state.password}
                   />
                 </div>
                 <div className="control">

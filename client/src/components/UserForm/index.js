@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { registerConsumer } from '../../services/usersApi';
 // const url = endpoint url
 
 class UserForm extends Component {
@@ -33,7 +33,7 @@ class UserForm extends Component {
             phone_number: this.state.phone_number,
         }
         //POST request here
-        console.log(data);
+        registerConsumer(data);
 
         this.setState({
           first_name: "",

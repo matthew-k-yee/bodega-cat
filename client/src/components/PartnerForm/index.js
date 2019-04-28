@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { registerPartner } from '../../services/usersApi';
 
 // const url = endpoint url
 
@@ -33,7 +34,7 @@ class PartnerForm extends Component {
             phone_number: this.state.phone_number,
         }
         //POST request here
-        console.log(data);
+        registerPartner(data);
 
         this.setState({
           first_name: "",
