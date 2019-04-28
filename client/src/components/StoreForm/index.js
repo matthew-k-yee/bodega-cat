@@ -7,13 +7,17 @@ class StoreForm extends Component {
         super(props);
         this.state = {
           name: "",
-          email: "",
-          password: "",
           address: "",
           phone_number: "",
-          hours_of_operation: "",
+          monday: "",
+          tuesday: "",
+          wednesday: "",
+          thursday: "",
+          friday: "",
+          saturday: "",
+          sunday: "",
           category: "",
-          inventory: []
+          partner_id: ""
         }
     }
 
@@ -27,27 +31,35 @@ class StoreForm extends Component {
     onFormSubmit = event => {
         event.preventDefault();
         let data = {
-            name: this.state.name,
-            email: this.state.email,
-            password: this.state.password,
-            address: this.state.address,
-            phone_number: this.state.phone_number,
-            hours_of_operation: this.state.hours_of_operation,
-            category: this.state.category,
-            inventory: this.state.inventory
+          name: this.state.name,
+          address: this.state.address,
+          phone_number: this.state.phone_number,
+          monday: this.state.monday,
+          tuesday: this.state.tuesday,
+          wednesday: this.state.wednesday,
+          thursday: this.state.thursday,
+          friday: this.state.friday,
+          saturday: this.state.saturday,
+          sunday: this.state.sunday,
+          category: this.state.category,
+          partner_id: this.state.partner_id
         }
         //POST request here
         console.log(data);
 
         this.setState({
           name: "",
-          email: "",
-          password: "",
           address: "",
           phone_number: "",
-          hours_of_operation: "",
+          monday: "",
+          tuesday: "",
+          wednesday: "",
+          thursday: "",
+          friday: "",
+          saturday: "",
+          sunday: "",
           category: "",
-          inventory: []
+          partner_id: ""
         });
     }
 
@@ -57,33 +69,13 @@ class StoreForm extends Component {
               <h2 className="title">Sign Up</h2>
               <form onSubmit={ this.onFormSubmit }>
                 <div className="field">
-                  <label htmlFor="name">Full Name: </label>
+                  <label htmlFor="name">Name: </label>
                   <input
                     onChange={this.onFormChange}
                     type="text"
                     name="name"
-                    placeholder="John Doe"
+                    placeholder="Mega Store"
                     value={this.state.name}
-                  />
-                </div>
-                <div className="field">
-                  <label htmlFor="email">Email: </label>
-                  <input
-                    onChange={this.onFormChange}
-                    type="text"
-                    name="email"
-                    placeholder="Email@Domain.com"
-                    value={this.state.email}
-                  />
-                </div>
-                <div className="field">
-                  <label htmlFor="password">Password: </label>
-                  <input
-                    onChange={this.onFormChange}
-                    type="password"
-                    name="password"
-                    placeholder="password"
-                    value={this.state.password}
                   />
                 </div>
                 <div className="field">
@@ -118,22 +110,7 @@ class StoreForm extends Component {
                     value={this.state.category}
                   />
                 </div>
-
-                {/* Uncomment when InventoryForm is created*/}
-                {/* <Inventory /> */}
-
-
-                {/* Uncomment when we implement the hours of operation */}
-                {/* <div className="field">
-                  <label htmlFor="hours_of_operation">Hours of Operation: </label>
-                  <input
-                    onChange={this.onFormChange}
-                    type="text"
-                    name="hours_of_operation"
-                    placeholder="12345"
-                    value={this.state.hours_of_operation}
-                  />
-                </div> */}
+                {/* Insert hours of operation input here */}
                 <div className="control">
                   <button type="submit" className="button">Create Business</button>
                 </div>

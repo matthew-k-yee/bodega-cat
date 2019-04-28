@@ -10,12 +10,12 @@ const sequelize = new Sequelize({
 });
 
 const Consumer = sequelize.define('consumer', {
-  first_name: Sequelize.STRING, 
+  first_name: Sequelize.STRING,
   last_name: Sequelize.STRING,
   email: Sequelize.STRING,
   password_digest: Sequelize.STRING,
-  street_address: Sequelize.STRING,
-  phone_number: Sequelize.STRING,
+  address: Sequelize.STRING,
+  phone_number: Sequelize.INTEGER,
 });
 
 const Partner = sequelize.define('partner', {
@@ -26,6 +26,49 @@ const Partner = sequelize.define('partner', {
   address: Sequelize.STRING,
   phone_number: Sequelize.STRING,
 });
+
+// User.beforeCreate((user, options) => {
+//   const password_digest = bcrypt.hashSync(user.password, 10);
+//   user.password = password_digest;
+// });
+
+// const Card = sequelize.define('credit_card', {
+//   first_name: Sequelize.STRING,
+//   last_name: Sequelize.STRING,
+//   card_number: Sequelize.INTEGER,
+//   exp_date: Sequelize.INTEGER,
+//   cvc_number: Sequelize.INTEGER
+// });
+
+// Card.associate = models => {
+//   Card.belongsTo(models.User, {
+//     onDelete: 'CASCADE',
+//     foreignKey: {
+//       allowNull: false
+//     }
+//   });
+
+// }
+
+
+// const History = sequelize.define('order_history', {
+//   // idk what's going here yet
+//   order_number: Sequelize.INTEGER
+// });
+
+// History.associate = models => {
+//   History.belongsTo(models.User, {
+//     onDelete: 'CASCADE',
+//     foreignKey: {
+//       allowNull: false
+//     }
+//   });
+// }
+
+// User.associate = models => {
+//   User.hasMany(models.Card);
+//   User.hasOne(models.History);
+// }
 
 const Store = sequelize.define('store', {
   store_name: Sequelize.STRING, 
