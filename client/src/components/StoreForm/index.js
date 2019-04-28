@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 // const url = endpoint url
 
-class BusinessForm extends Component {
+class StoreForm extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -143,4 +143,4 @@ class BusinessForm extends Component {
     }
 }
 
-export default BusinessForm;
+export default StoreForm;
