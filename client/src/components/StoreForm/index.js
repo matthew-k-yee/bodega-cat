@@ -112,7 +112,7 @@ class StoreForm extends Component {
                 </div>
                 {/* Insert hours of operation input here */}
                 <div className="control">
-                  <button type="submit" className="button">Create Business</button>
+                  <button type="submit" className="button">Create Store</button>
                 </div>
             </form>
             </div>
