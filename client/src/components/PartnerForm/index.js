@@ -114,7 +114,7 @@ class PartnerForm extends Component {
                 </div>
                 {/* Add option for credit card */}
                 <div className="control">
-                  <button type="submit" className="button">Create User</button>
+                  <button type="submit" className="button">Create Profile</button>
                 </div>
             </form>
             </div>
