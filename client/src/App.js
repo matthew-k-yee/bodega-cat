@@ -8,8 +8,12 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      view: ''
+      view: '',
+      isLogged: false,
+      user_email: null
     }
+    this.populateStorage = this.populateStorage.bind(this);
+    this.logUser = this.logUser.bind(this);
     this.render = this.render.bind(this);
   }
 
@@ -17,6 +21,18 @@ class App extends Component {
     this.setState({
       view: view
     })
+  }
+
+  populateStorage = token => {
+    localStorage.setItem('token', token);
+  }
+
+  logUser = userToken => {
+    const userData = jwtDecode(userToken.token);
+    this.setState({
+      isLogged: true,
+      email: userData.email,
+    });
   }
 
   render = () => {
