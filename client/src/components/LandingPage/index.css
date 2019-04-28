@@ -1,13 +1,54 @@
-.navB {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border:green;
-  }
-  
-  
-  .logohead {
-    align-content: flex-start;
-  
-  }
-  @import "~antd/dist/antd.css";
+html {
+}
+
+body {
+  /* background-image: url('../media/urban.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #1f8bba; */
+}
+
+#nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #27B5F2;
+  color: #fff;
+  text-shadow: #000 2px 1px 1px;
+}
+
+#nav-buttons {
+  display: flex;
+  position: relative;
+  width: 13%;
+  top: 7px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#container {
+  background-image: url('../media/urban.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+#input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  height: 100vh;
+  background-color: rgba(31, 139, 186, 0.48);
+}
+
+#input p {
+  color: #fff;
+  text-shadow: #000 2px 1px 1px;
+  font-size: 20px;
+}
+
+#address-input {
+  width: 50%;
+}
