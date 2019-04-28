@@ -36,7 +36,8 @@ const Store = sequelize.define('store', {
 const Inventory = sequelize.define('inventory', {
   name: Sequelize.TEXT,
   price: Sequelize.STRING,
-  item_count: Sequelize.INTEGER
+  item_count: Sequelize.INTEGER,
+  category: Sequelize.TEXT
 })
 
 
