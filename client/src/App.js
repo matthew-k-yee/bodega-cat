@@ -5,6 +5,7 @@ import './App.css';
 
 import LandingPage from './components/LandingPage';
 import SignUpContainer from './components/SignUpContainer';
+import Dashboard from './components/Dashboard';
 
 class App extends Component {
   constructor(props){
@@ -31,12 +32,13 @@ class App extends Component {
   }
 
   logUser = () => {
-    const token = localStorage.getItem('token');
-    const userData = jwtDecode(token);
+    console.log('logUser');
+    // const token = localStorage.getItem('token');
+    // const userData = jwtDecode(token);
     this.setState({
       isLogged: true,
-      email: userData.email,
-      view: 'landing'
+      // email: userData.email,
+      view: 'dashboard'
     });
   }
 
@@ -46,7 +48,10 @@ class App extends Component {
         return (<LandingPage changeView={this.changeView}/>)
         break;
       case 'signup':
-        return (<SignUpContainer populateStorage={this.populateStorage} logUser={this.logUser} changeView={this.changeView}/>)
+        return (<SignUpContainer populateStorage={this.populateStorage} logUser={this.logUser}/>)
+        break;
+        case 'dashboard':
+        return (<Dashboard changeView={this.changeView}/>)
         break;
       default:
         return (<LandingPage changeView={this.changeView}/>)

@@ -37,8 +37,8 @@ class SignUpContainer extends Component {
           <TabPane tabId="1">
             <Row>
               <Col sm="12">
-                <h4>Customer Sign Up</h4>
-                <UserForm populateStorage={this.props.populateStorage} logUser={this.logUser} />
+                <h4>Partner Sign Up</h4>
+                <UserForm populateStorage={this.props.populateStorage} logUser={this.props.logUser} />
               </Col>
             </Row>
           </TabPane>

@@ -33,7 +33,7 @@ class UserForm extends Component {
             phone_number: this.state.phone_number,
         }
         //POST request here
-        registerConsumer(data);
+        // registerConsumer(data);
         // this.props.populateStorage(token);
         this.setState({
           first_name: "",
@@ -43,7 +43,7 @@ class UserForm extends Component {
           street_address: "",
           phone_number: ""
         });
-        // this.props.logUser();
+        this.props.logUser();
       }
 
     render() {
@@ -105,7 +105,7 @@ class UserForm extends Component {
                   <label htmlFor="phone_number">Phone: </label>
                   <input
                     onChange={this.onFormChange}
-                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                    // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     type="text"
                     name="phone_number"
                     placeholder="123-456-7890"
