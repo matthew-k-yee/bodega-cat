@@ -31,7 +31,7 @@ app.use(logger('dev'));
 
 const PORT = process.env.PORT || 3001
 
-app.use('/',
+app.get('/',
   jwt({ secret }),
   (req, res) => {
     res.json({
@@ -76,8 +76,8 @@ app.get('/', (req, res) => {
   res.json({msg: 'it works'});
   })
    
-app.get('/', (req, res) =>
-  res.render("index.pug", {keyPublishable}));
+// app.get('/', (req, res) =>
+//   res.render("index.pug", {keyPublishable}));
 
 app.get('/maps/:fromaddress/:destinationaddress', async (req, res) => {
   try {
@@ -241,5 +241,10 @@ app.delete('/partners/:id', async (req, res) => {
 
 
 app.listen(PORT, () => {
+<<<<<<< HEAD
   console.log(`Express server listening on port ${PORT}`);
 });
+=======
+  console.log('The server is listening on port: ', PORT);
+});
+>>>>>>> d8649edc0f9db289a1a50b6ee06216e3ce0c0617
