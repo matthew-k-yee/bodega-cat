@@ -2,13 +2,15 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
+require('dotenv').config()
+const axios = require('axios')
 const { Consumer, Partner, Store, Inventory } = require('./models');
 
 const keyPublishable = process.env.PUBLISHABLE_KEY;
 const keySecret = process.env.SECRET_KEY;
 
 const secret = process.env.GOOGLE_API_KEY;
-
+// console.log(secret)
 const app = express();
 const stripe = require("stripe")(keySecret);
 
@@ -24,8 +26,16 @@ const PORT = process.env.PORT || 3001
 app.get('/', (req, res) =>
   res.render("index.pug", {keyPublishable}));
 
-app.get('/maps', (req, res) => 
-  console.log(`${secret}`)
+app.get('/maps/:fromaddress/:destinationaddress', async (req, res) => {
+  try {
+    const fromaddress = req.params.fromaddress;
+    const destaddress = req.params.destinationaddress
+    const resp = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${fromaddress}+NY&destinations=${destaddress}+NY&mode=walking&language=en-EN&key=${secret}`)
+    res.json(resp.data)
+    } catch (e) {
+      console.log(e)
+    }
+  }
 )
 
 app.get('/consumers', async (req, res) => {
@@ -37,7 +47,7 @@ app.get('/consumers', async (req, res) => {
   }
 }); 
 
-app.get('/consumers/:id', async (req, res) => {
+app.get('/consumers/:id/', async (req, res) => {
   try {
     const user = await Consumer.findByPk(req.params.id);
     res.json({user});
@@ -75,14 +85,45 @@ app.get('/stores', async (req, res) => {
   }
 });
 
-app.get('/stores/:id', async (req, res) => {
+app.get('/stores/:id/inventory', async (req, res) => {
   try {
     const store = await Store.findByPk(req.params.id);
-    res.json({store});
+    // console.log(store.id)
+    // debugger
+    const inventory = await Inventory.findAll( {
+      where: {
+        store_id: 1
+      }
+    })
+    // debugger
+    // const allInventory = await Store.findByPk(req.params.id, {
+    //   include: [{
+    //     model: Inventory, 
+    //     attributes: ['id', 'name', 'category', 'price', 'in_stock']
+    //   }]
+    // })
+    res.json({inventory});
   } catch(e) {
     console.log(e);
   }
 });
+
+
+// app.get('/instructors/:id/courses',async(req,res)=>{
+//   try{
+//       const id = req.params.id;
+//     const courseTeach= await Instructor.findOne({
+//       where:{id: id},
+//       include:[{
+//         model:Course,
+//         required:true,
+//       }]
+//     });
+//     res.json(courseTeach);
+//   }catch(e){
+//     res.status(500).json({e:e.message});
+//   }
+// });
 
 app.post('/stores', async (req, res) => {
   try {
