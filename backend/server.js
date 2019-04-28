@@ -241,10 +241,7 @@ app.delete('/partners/:id', async (req, res) => {
 
 
 app.listen(PORT, () => {
-<<<<<<< HEAD
   console.log(`Express server listening on port ${PORT}`);
 });
-=======
-  console.log('The server is listening on port: ', PORT);
-});
->>>>>>> d8649edc0f9db289a1a50b6ee06216e3ce0c0617
+
+
