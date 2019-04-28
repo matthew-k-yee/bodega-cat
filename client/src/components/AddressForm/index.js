@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import {Map, InfoWindow, Marker, DistanceMatrixService, GoogleApiWrapper} from 'google-maps-react';
+import StoreList from '../StoreList';
 
 const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
@@ -10,7 +11,7 @@ class AddressForm extends Component{
     super(props);
       this.state={
         street_address:'',
-        searchedAddress:''
+        searchedAddress:[]
     }
 
   this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,13 +32,9 @@ class AddressForm extends Component{
 
   try {
     const data = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${name}&key=${googleClientId}`);
-<<<<<<< HEAD
-=======
-    // const address = data.data.results[0].formatted_address;
->>>>>>> a7b91114dc0b585197ba1f040bc8cf85e60814dc
     const address=data.data.results[0].formatted_address;
 
-
+    console.log('data of address form')
     console.log(address)
 
     this.setState({searchedAddress: address})
@@ -74,8 +71,7 @@ render() {
 
 
         			</form>
-
-              {this.state.searchedAddress}
+              <StoreList searchedAddress={this.state.searchedAddress}/>
       </div>
     );
 
