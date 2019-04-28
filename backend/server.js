@@ -128,6 +128,33 @@ app.delete('/inventory/:id', async (req, res) => {
   }
 });
 
+app.get('/partners', async (req, res) => {
+  try {
+    const partners = Partner.findAll();
+    res.json({partner});
+  } catch(e) {
+    console.log(e);
+  }
+});
+
+app.get('/partners/:id', async (req, res) => {
+  try {
+    const partner = Partner.findByPk(req.params.id);
+    res.json({partner});
+  } catch(e) {
+    console.log(e);
+  }
+});
+
+app.delete('/partners/:id', async (req, res) => {
+  try {
+    const queryItem = Partner.findByPk(req.params.id);
+    res.json({message: 'item deleted', item: queryItem});
+  } catch(e) {
+    console.error(e);
+  }
+});
+
 app.listen(PORT, () => {
   console.log('The server is listening on port: ', PORT);
 });
