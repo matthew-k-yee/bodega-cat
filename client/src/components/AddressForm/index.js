@@ -31,6 +31,10 @@ class AddressForm extends Component{
 
   try {
     const data = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${name}&key=${googleClientId}`);
+<<<<<<< HEAD
+=======
+    // const address = data.data.results[0].formatted_address;
+>>>>>>> a7b91114dc0b585197ba1f040bc8cf85e60814dc
     const address=data.data.results[0].formatted_address;
 
 
