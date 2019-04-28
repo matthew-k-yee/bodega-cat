@@ -17,7 +17,7 @@ const findUser = async (email) => {
 };
 
 // Save user's info after registration
-const create = async (user) => {
+const save = async (user) => {
   try {
     // hash user's clear text password
     const digest = bcrypt.hashSync(user.password, 11);
@@ -29,6 +29,7 @@ const create = async (user) => {
       address: user.address,
       phone_number: user.phone_number
     });
+    delete newUser.password_digest;
     return newUser;
   } catch (err) {
     throw (err);
@@ -63,7 +64,7 @@ const findID = async (id) => {
 
 module.exports = {
   findUser,
-  create,
+  save,
   login,
   findID
 }

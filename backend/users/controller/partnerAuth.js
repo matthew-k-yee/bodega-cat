@@ -8,15 +8,14 @@ const renderRegister = (req, res) => {
 const handleRegister = async (req, res) => {
   try {
     // save inputted user info
-    const newUser = await Partner.create(req.body);
+    const newUser = await Partner.save(req.body);
     // remove user's password
     delete newUser.password_digest;
-    const userToken = await token.create(newUser);
+    const userToken = await token.create({ newUser });
     // send token to client
     return res.json({ userToken });
   } catch (err) {
-    req.flash('error', 'username unavailable');
-    res.redirect('/partner/auth/register');
+    throw (err);
   }
 };
 
@@ -31,7 +30,7 @@ const handleLogin = async (req, res) => {
     // remove password from grabbed user
     delete userInfo.password_digest;
     // create token for already existing user
-    const userToken = await token.create(userInfo);
+    const userToken = await token.create({ userInfo });
     // send token wrapped in json object to client
     return res.json({ userToken });
   } catch (err) {

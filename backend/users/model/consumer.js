@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 // const db = require('../../testConDb');
-const Consumer  = require('../../models');
+const {Consumer}  = require('../../models');
 
 // Search consumers by email
 const findUser = async (email) => {
@@ -17,7 +17,7 @@ const findUser = async (email) => {
 };
 
 // Save user's info after registration
-const create = async (user) => {
+const save = async (user) => {
   try {
     // hash user's clear text password
     const digest = bcrypt.hashSync(user.password, 11);
@@ -64,7 +64,7 @@ const findID = async (id) => {
 
 module.exports = {
   findUser,
-  create,
+  save,
   login,
   findID
 }

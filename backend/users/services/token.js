@@ -3,7 +3,9 @@ const jwt = require('jsonwebtoken');
 const secret = process.env.TOKEN_SECRET || 'securesecret';
 
 // Pass user content and create a token for that particular user
-const create = payload => {
+module.exports = {
+  // pass user content and create a token for that particular user
+  create(payload) {
     return new Promise((resolve, reject) => {
       jwt.sign(
         payload,
@@ -11,6 +13,5 @@ const create = payload => {
         (err, token) => (err ? reject(err) : resolve(token)),
       );
     });
-  };
-
-module.exports = create;
+  },
+};
