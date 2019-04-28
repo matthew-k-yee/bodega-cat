@@ -3,7 +3,7 @@ const {Sequelize} = require('sequelize');
 const sequelize = new Sequelize({
   database: 'bodega_cat',
   dialect: 'postgres',
-  operatorsAliases: false,
+  // operatorsAliases: false,
   define: {
     underscored: true
   }
@@ -24,7 +24,7 @@ const Partner = sequelize.define('partner', {
   email: Sequelize.STRING,
   password_digest: Sequelize.STRING,
   address: Sequelize.STRING,
-  phone_number: Sequelize.INTEGER,
+  phone_number: Sequelize.STRING,
 });
 
 // User.beforeCreate((user, options) => {
@@ -71,25 +71,38 @@ const Partner = sequelize.define('partner', {
 // }
 
 const Store = sequelize.define('store', {
-  address: Sequelize.TEXT,
-  phone_number: Sequelize.INTEGER,
-  hours_of_operation: Sequelize.TEXT,
-  email: Sequelize.TEXT,
-  category: Sequelize.TEXT,
-  password: Sequelize.TEXT
-});
-
-const Inventory = sequelize.define('inventory', {
-  name: Sequelize.TEXT,
-  price: Sequelize.STRING,
-  item_count: Sequelize.INTEGER
+  store_name: Sequelize.STRING, 
+  address: Sequelize.STRING,
+  phone_number: Sequelize.STRING,
+  monday: Sequelize.STRING,
+  tuesday: Sequelize.STRING,
+  wednesday: Sequelize.STRING,
+  thursday: Sequelize.STRING,
+  friday: Sequelize.STRING,
+  saturday: Sequelize.STRING,
+  monday: Sequelize.STRING,
+  sunday: Sequelize.STRING,
+  category: Sequelize.STRING,
+  partner_id: Sequelize.INTEGER
 })
 
+const Inventory = sequelize.define('inventory', {
+  name: Sequelize.STRING,
+  category: Sequelize.STRING,
+  price: Sequelize.INTEGER,
+  in_stock: Sequelize.BOOLEAN,
+  store_id: Sequelize.INTEGER
+})
+
+Partner.hasMany(Store)
+Store.belongsTo(Partner)
+
+Store.hasOne(Inventory)
 
 module.exports = {
   sequelize, 
   Consumer,
-  Partner,
-  Store,
+  Partner, 
+  Store, 
   Inventory
 }
