@@ -6,15 +6,12 @@ class UserForm extends Component {
     constructor(props){
         super(props);
         this.state = {
-            name: "",
-            email: "",
-            password: "",
-            street_address: "",
-            zipcode: "",
-            city: "",
-            state: "",
-            phone_number: "",
-            credit_card: ""
+          first_name: "",
+          last_name: "",
+          email: "",
+          password_digest: "",
+          street_address: "",
+          phone_number: ""
         }
     }
 
@@ -28,28 +25,23 @@ class UserForm extends Component {
     onFormSubmit = event => {
         event.preventDefault();
         let data = {
-            name: this.state.name,
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
             email: this.state.email,
-            password: this.state.password,
-            zipcode: this.state.zipcode,
-            city: this.state.city,
-            state: this.state.state,
+            password_digest: this.state.password_digest,
+            street_address: this.state.street_address,
             phone_number: this.state.phone_number,
-            credit_card: this.state.credit_card
         }
         //POST request here
         console.log(data);
 
         this.setState({
-          name: "",
+          first_name: "",
+          last_name: "",
           email: "",
-          password: "",
+          password_digest: "",
           street_address: "",
-          zipcode: "",
-          city: "",
-          state: "",
-          phone_number: "",
-          credit_card: ""
+          phone_number: ""
         })
     }
 
@@ -59,13 +51,23 @@ class UserForm extends Component {
               <h2 className="title">Sign Up</h2>
               <form onSubmit={ this.onFormSubmit }>
                 <div className="field">
-                  <label htmlFor="name">Full Name: </label>
+                  <label htmlFor="first_name">First Name: </label>
                   <input
                     onChange={this.onFormChange}
                     type="text"
-                    name="name"
-                    placeholder="John Doe"
-                    value={this.state.name}
+                    name="first_name"
+                    placeholder="John"
+                    value={this.state.first_name}
+                  />
+                </div>
+                <div className="field">
+                  <label htmlFor="last_name">Last Name: </label>
+                  <input
+                    onChange={this.onFormChange}
+                    type="text"
+                    name="last_name"
+                    placeholder="Doe"
+                    value={this.state.last_name}
                   />
                 </div>
                 <div className="field">
@@ -79,13 +81,13 @@ class UserForm extends Component {
                   />
                 </div>
                 <div className="field">
-                  <label htmlFor="password">Password: </label>
+                  <label htmlFor="password_digest">Password: </label>
                   <input
                     onChange={this.onFormChange}
                     type="password"
-                    name="password"
+                    name="password_digest"
                     placeholder="password"
-                    value={this.state.password}
+                    value={this.state.password_digest}
                   />
                 </div>
                 <div className="field">
@@ -96,36 +98,6 @@ class UserForm extends Component {
                     name="street_address"
                     placeholder="123 Somewhere St."
                     value={this.state.street_address}
-                  />
-                </div>
-                <div className="field">
-                  <label htmlFor="city">City: </label>
-                  <input
-                    onChange={this.onFormChange}
-                    type="text"
-                    name="city"
-                    placeholder="New York"
-                    value={this.state.city}
-                  />
-                </div>
-                <div className="field">
-                  <label htmlFor="state">State: </label>
-                  <input
-                    onChange={this.onFormChange}
-                    type="text"
-                    name="state"
-                    placeholder="NY"
-                    value={this.state.state}
-                  />
-                </div>
-                <div className="field">
-                  <label htmlFor="zipcode">Zipcode: </label>
-                  <input
-                    onChange={this.onFormChange}
-                    type="text"
-                    name="zipcode"
-                    placeholder="12345"
-                    value={this.state.zipcode}
                   />
                 </div>
                 <div className="field">
