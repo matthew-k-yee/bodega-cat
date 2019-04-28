@@ -117,6 +117,11 @@ async function seeds() {
         price: 1.50,
         item_count: 25
       },
+      {
+        name:  'Toliet Paper',
+        price: 1.50,
+        item_count: 25
+      },
     ])
   } catch (e) {
     console.log(e);

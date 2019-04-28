@@ -40,6 +40,14 @@ const Inventory = sequelize.define('inventory', {
 })
 
 
+Inventory.belongsTo(Store)
+Store.hasMany(Inventory)
+
+User.hasMany(Inventory)
+Inventory.belongsTo(User)
+
+
+
 module.exports = {
   sequelize, 
   User, 

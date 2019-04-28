@@ -4,16 +4,23 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const { User, Store, Inventory } = require('./models');
 
-const app = express()
+const keyPublishable = process.env.PUBLISHABLE_KEY;
+const keySecret = process.env.SECRET_KEY;
+
+const app = express();
+const stripe = require("stripe")(keySecret);
+
+app.set("view engine", "pug");
+app.use(require("body-parser").urlencoded({extended: false}));
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(logger('dev'));
 
 const PORT = process.env.PORT || 3001
 
-app.get('/', (req, res) => {
-  res.json({msg: 'it works'})
-});
+app.get('/', (req, res) =>
+  res.render("index.pug", {keyPublishable}));
 
 app.get('/users', async (req, res) => {
   try {
@@ -39,6 +46,15 @@ app.post('/users', async (req, res) => {
     res.json({
       message: `User with name ${req.body.name} created!`
     });
+  } catch(e) {
+    console.error(e);
+  }
+});
+
+app.delete('/users/:id', async (req, res) => {
+  try {
+    const queryItem = User.findByPk(req.params.id);
+    res.json({message: 'item deleted', item: queryItem});
   } catch(e) {
     console.error(e);
   }
@@ -71,6 +87,15 @@ app.post('/stores', async (req, res) => {
   }
 });
 
+app.delete('/stores/:id', async (req, res) => {
+  try {
+    const queryItem = Store.findByPk(req.params.id);
+    res.json({message: 'item deleted', item: queryItem});
+  } catch(e) {
+    console.error(e);
+  }
+});
+
 app.get('/inventory', async (req, res) => {
   const items = await Inventory.findAll();
   res.json({items});
@@ -79,7 +104,6 @@ app.get('/inventory', async (req, res) => {
 app.get('/inventory/:id', async (req, res) => {
   try {
     const item = await Inventory.findByPk(req.params.id);
-    consoel
     res.json({item});
   } catch(e) {
     console.log(e);
@@ -98,7 +122,7 @@ app.post('/inventory', async (req, res) => {
 app.delete('/inventory/:id', async (req, res) => {
   try {
     const queryItem = Inventory.findByPk(req.params.id);
-    
+    res.json({message: 'item deleted', item: queryItem});
   } catch(e) {
     console.error(e);
   }
