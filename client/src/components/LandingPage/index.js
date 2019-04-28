@@ -4,7 +4,7 @@ import "./index.css";
 
 
 
-export default function Nav(props) {
+export default function LandingPage(props) {
 
   return (
 
@@ -22,9 +22,9 @@ export default function Nav(props) {
       enterButton
     />
         </div>
-        
-        
-        
-    
+
+
+
+
   )
 }
