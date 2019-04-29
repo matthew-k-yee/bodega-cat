@@ -1,13 +1,71 @@
-import React from 'react';
+import React, { Component } from 'react';
+import jwtDecode from 'jwt-decode';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
+import LandingPage from './components/LandingPage';
+import SignUpContainer from './components/SignUpContainer';
+import Dashboard from './components/Dashboard';
+
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      view: '',
+      isLogged: false,
+      user_email: null
+    }
+    this.populateStorage = this.populateStorage.bind(this);
+    this.logUser = this.logUser.bind(this);
+    this.render = this.render.bind(this);
+    this.changeView = this.changeView.bind(this);
+  }
+
+  changeView = async view => {
+    await this.setState({
+      view: view
+    });
+  }
+
+  populateStorage = token => {
+    localStorage.setItem('token', token);
+  }
+
+  logUser = () => {
+    console.log('logUser');
+    // const token = localStorage.getItem('token');
+    // const userData = jwtDecode(token);
+    this.setState({
+      isLogged: true,
+      // email: userData.email,
+      view: 'dashboard'
+    });
+  }
+
+  render = () => {
+    switch (this.state.view) {
+      case 'landing':
+        return (<LandingPage changeView={this.changeView}/>)
+        break;
+      case 'signup':
+        return (<SignUpContainer populateStorage={this.populateStorage} logUser={this.logUser}/>)
+        break;
+        case 'dashboard':
+        return (<Dashboard changeView={this.changeView}/>)
+        break;
+      default:
+        return (<LandingPage changeView={this.changeView}/>)
+    }
+  }
+
+  render() {
+    return (
+      <div className="App">
       Bodega Cats
-    </div>
-  );
+      {this.render()}
+      </div>
+    );
+  }
 }
 
 export default App;

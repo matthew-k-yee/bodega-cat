@@ -1,3 +1,4 @@
+
 const { sequelize } = require('./models');
 
 async function resetDb() {
