@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 // const db = require('../../testConDb');
-const {Consumer}  = require('../../models');
+const { Consumer }  = require('../../models');
 
 // Search consumers by email
 const findUser = async (email) => {
@@ -17,10 +17,12 @@ const findUser = async (email) => {
 };
 
 // Save user's info after registration
-const save = async (user) => {
+const save = async ({ user }) => {
   try {
     // hash user's clear text password
+    console.log(user);
     const digest = bcrypt.hashSync(user.password, 11);
+    console.log(`Here is the User's hashed password ${digest}`);
     const newUser = await Consumer.create({
       first_name: user.first_name,
       last_name: user.last_name,
@@ -29,6 +31,7 @@ const save = async (user) => {
       address: user.address,
       phone_number: user.phone_number
     });
+    console.log(newUser);
     delete newUser.password_digest;
     return newUser;
   } catch (err) {
@@ -53,7 +56,7 @@ const login = async (user) => {
 };
 
 // Look up based on user's id
-const findID = async (id) => {
+const findById = async (id) => {
   try {
     const user = await Consumer.findByPk(id);
     return user;
@@ -66,5 +69,5 @@ module.exports = {
   findUser,
   save,
   login,
-  findID
+  findById
 }

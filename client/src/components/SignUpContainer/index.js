@@ -11,7 +11,15 @@ class SignUpContainer extends Component {
     this.state = {
       activeTab: '1'
     }
+    this.toggle = this.toggle.bind(this);
   }
+
+  toggle = (str) => {
+    this.setState({
+      activeTab: str
+    });
+  }
+
   render() {
     return (
       <div>
@@ -21,7 +29,7 @@ class SignUpContainer extends Component {
               className={classnames({ active: this.state.activeTab === '1' })}
               onClick={() => { this.toggle('1'); }}
             >
-              Tab1
+              Consumer
             </NavLink>
           </NavItem>
           <NavItem>
@@ -29,7 +37,7 @@ class SignUpContainer extends Component {
               className={classnames({ active: this.state.activeTab === '2' })}
               onClick={() => { this.toggle('2'); }}
             >
-              Moar Tabs
+              Partner
             </NavLink>
           </NavItem>
         </Nav>
@@ -37,12 +45,20 @@ class SignUpContainer extends Component {
           <TabPane tabId="1">
             <Row>
               <Col sm="12">
-                <h4>Partner Sign Up</h4>
+                <h4>C Sign Up</h4>
                 <UserForm populateStorage={this.props.populateStorage} logUser={this.props.logUser} />
               </Col>
             </Row>
           </TabPane>
           <TabPane tabId="2">
+            <Row>
+              <Col sm="12">
+                <h4>P Sign Up</h4>
+                <PartnerForm populateStorage={this.props.populateStorage} logUser={this.props.logUser} />
+              </Col>
+            </Row>
+          </TabPane>
+          <TabPane tabId="3">
             <Row>
               <Col sm="6">
                 <Card body>

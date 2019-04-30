@@ -92,7 +92,7 @@ class PartnerForm extends Component {
                   />
                 </div>
                 <div className="field">
-                  <label htmlFor="street_address">Street Address: </label>
+                  <label htmlFor="street_address">Store Address: </label>
                   <input
                     onChange={this.onFormChange}
                     type="text"
