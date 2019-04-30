@@ -4,7 +4,7 @@ import { Button, Input } from 'reactstrap';
 import "./index.css";
 
 export default function LandingPage(props) {
-console.log(props.view)
+// console.log(props.view)
   return (
     <div>
       <nav id="nav">
@@ -14,7 +14,7 @@ console.log(props.view)
         <h1>Bodega Cat</h1>
         <div id="nav-buttons">
           <p onClick={() => props.changeView('signup')}>Sign Up</p>
-          <p>Sign In</p>
+          <p onClick={() => props.changeView('login')}>Log In</p>
         </div>
       </nav>
       <div id="container">

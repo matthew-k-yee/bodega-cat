@@ -5,6 +5,7 @@ import './App.css';
 
 import LandingPage from './components/LandingPage';
 import SignUpContainer from './components/SignUpContainer';
+import SignInContainer from './components/SignInContainer';
 import Dashboard from './components/Dashboard';
 
 class App extends Component {
@@ -15,10 +16,10 @@ class App extends Component {
       isLogged: false,
       user_email: null
     }
-    this.populateStorage = this.populateStorage.bind(this);
-    this.logUser = this.logUser.bind(this);
     this.render = this.render.bind(this);
     this.changeView = this.changeView.bind(this);
+    this.populateStorage = this.populateStorage.bind(this);
+    this.logUser = this.logUser.bind(this);
   }
 
   changeView = async view => {
@@ -32,13 +33,12 @@ class App extends Component {
   }
 
   logUser = () => {
-    console.log('logUser');
-    // const token = localStorage.getItem('token');
-    // const userData = jwtDecode(token);
+    const token = localStorage.getItem('token');
+    const userData = jwtDecode(token);
     this.setState({
       isLogged: true,
-      // email: userData.email,
-      view: 'dashboard'
+      email: userData.email,
+      view: 'landing'
     });
   }
 
@@ -50,7 +50,10 @@ class App extends Component {
       case 'signup':
         return (<SignUpContainer populateStorage={this.populateStorage} logUser={this.logUser}/>)
         break;
-        case 'dashboard':
+      case 'login':
+        return (<SignInContainer populateStorage={this.populateStorage} logUser={this.logUser}/>)
+        break;
+      case 'dashboard':
         return (<Dashboard changeView={this.changeView}/>)
         break;
       default:

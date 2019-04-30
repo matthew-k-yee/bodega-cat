@@ -8,7 +8,9 @@ const renderRegister = (req, res) => {
 const handleRegister = async (req, res) => {
   try {
     // save inputted user info
+    debugger;
     const newUser = await Consumer.save(req.body);
+    debugger;
     // remove user's password
     delete newUser.password_digest;
     const userToken = await token.create({ newUser });

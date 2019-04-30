@@ -1,8 +1,9 @@
 const axios = require('axios');
 
-const BE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
+const BE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
 
 export async function registerConsumer(user) {
+  debugger;
   try {
     const res = await axios.post(`${BE_URL}/consumer/auth/register`, { user });
     return res.json();

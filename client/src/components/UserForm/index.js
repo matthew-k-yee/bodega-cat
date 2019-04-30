@@ -10,9 +10,10 @@ class UserForm extends Component {
           last_name: "",
           email: "",
           password: "",
-          street_address: "",
+          address: "",
           phone_number: ""
         }
+        this.onFormSubmit = this.onFormSubmit.bind(this);
     }
 
     onFormChange = event => {
@@ -22,29 +23,35 @@ class UserForm extends Component {
         })
     }
 
-    onFormSubmit = event => {
+    onFormSubmit = async event => {
+      try {
         event.preventDefault();
         let data = {
             first_name: this.state.first_name,
             last_name: this.state.last_name,
             email: this.state.email,
             password: this.state.password,
-            street_address: this.state.street_address,
+            address: this.state.address,
             phone_number: this.state.phone_number,
         }
         //POST request here
-        // registerConsumer(data);
-        // this.props.populateStorage(token);
+        debugger;
+        const userToken = await registerConsumer(data);
+        debugger;
+        this.props.populateStorage(userToken);
         this.setState({
           first_name: "",
           last_name: "",
           email: "",
           password: "",
-          street_address: "",
+          address: "",
           phone_number: ""
         });
         this.props.logUser();
+      } catch (err) {
+        throw (err);
       }
+    }
 
     render() {
         return(
@@ -92,13 +99,13 @@ class UserForm extends Component {
                   />
                 </div>
                 <div className="field">
-                  <label htmlFor="street_address">Street Address: </label>
+                  <label htmlFor="address">Street Address: </label>
                   <input
                     onChange={this.onFormChange}
                     type="text"
-                    name="street_address"
+                    name="address"
                     placeholder="123 Somewhere St."
-                    value={this.state.street_address}
+                    value={this.state.address}
                   />
                 </div>
                 <div className="field">
